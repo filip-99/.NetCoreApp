@@ -2,11 +2,13 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using my_books.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +18,29 @@ namespace my_books
 {
     public class Startup
     {
+        // Deklarišemo promenjivu u koju smeštamo putanju ka bazi
+        public string ConnectionString { get; set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            // Dodeljujemo ovoj promenjivost vrednost, odmah pri pozivu ove klase u nekoj drugoj klasi
+            // Ovaj naziv "DefaultConnectionString" treba da bude isti kao naziv baze u fajlu appsettings.json
+            ConnectionString = Configuration.GetConnectionString("DefaultConnectionString");
         }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // U metodi ConfigureServices(IServiceCollection services) imamo dodavanje Swiggera
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddControllers();
+
+            // Nastavljamo dalje sa konfiguracijom baze, sada je potrebno da odmah ispod services.AddControllers(); izvršimo konfiguraciju konteksta sa SQL bazom podataka
+            // Potrebno je da instaliramo i Microsoft.EntityFrameworkCore.SqlServer verziju 5.0.17 zbog .Net Core SDK verzije 5
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
+
+
             services.AddSwaggerGen(c =>
             {
                 // Promenićemo ovde naslov i radnu verziju iz v1 u v2
