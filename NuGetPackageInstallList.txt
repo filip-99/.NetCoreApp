@@ -1,3 +1,10 @@
+POTREBNI PAKETI:
+
 + Microsoft.EntityFrameworkCore 5.0.17
 + Microsoft.EntityFrameworkCore.SqlServer 5.0.17
 + Microsoft.EntityFrameworkCore.Tools 5.0.17
+
+KOMANDE U Package Manager Console:
+
++ Add-Migration InitialDatabaseMigration
++ 
