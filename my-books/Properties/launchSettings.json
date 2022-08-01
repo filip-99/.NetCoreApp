@@ -1,4 +1,7 @@
-﻿{
+﻿// Ovaj fail sadrži postavke za pokretanje aplikacije, kao npr. dali želimo da pokrenemo IIS Express ili my_books
+// Takođe sadrži podešavanja kako će se pokrenuti (da li preko brauzera ili ne, preko koje ip adrese...)
+
+{
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,

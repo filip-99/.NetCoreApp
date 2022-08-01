@@ -9,6 +9,9 @@ namespace my_books.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+
+    // Klasa predstavlja primer kontrolera i nasleđuje kontroler osnovne klase
+    // Kasnije će biti izbrisana, jer nije potrebna ovom projektu
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -16,13 +19,16 @@ namespace my_books.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
+        // Deklarisan parametar po tipu ILogger
         private readonly ILogger<WeatherForecastController> _logger;
 
+        // Klasa takođe sadrži konstruktor koji ima prethodno deklarisan parametar ILogger
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
         }
 
+        // Takođe imamo i API krajnju tačku pod nazivom Get() tipa [HttpGet]
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {

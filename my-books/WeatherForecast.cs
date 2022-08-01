@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 
 namespace my_books
 {
+    // Takođe imamo testnu klasu koju će mo kasnije izbrisati, jer nam nije potrebna za ovaj projekat
     public class WeatherForecast
     {
         public DateTime Date { get; set; }

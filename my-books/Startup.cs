@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +30,8 @@ namespace my_books
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "my_books", Version = "v1" });
+                // Promenićemo ovde naslov i radnu verziju iz v1 u v2
+                c.SwaggerDoc("v2", new OpenApiInfo { Title = "my_books_updated_title", Version = "v2" });
             });
         }
 
@@ -41,7 +42,8 @@ namespace my_books
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "my_books v1"));
+                // Takođe i ovde menjamo najpre putanju /swagger/v2/swagger.json da ne bi se pojavila greška, jer je prethodno verzija izmenjena u c.SwaggerDoc...
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v2/swagger.json", "my_books_ui_updated v1"));
             }
 
             app.UseHttpsRedirection();
