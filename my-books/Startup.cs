@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using my_books.Data;
+using my_books.Data.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,9 @@ namespace my_books
             // Potrebno je da instaliramo i Microsoft.EntityFrameworkCore.SqlServer verziju 5.0.17 zbog .Net Core SDK verzije 5
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(ConnectionString));
 
+            // Potrebno je da konfigurišemo servis klasu BooksService.cs
+            // Pa će mo koristiti servis, koji omogućava prelaz parametra u bazu
+            services.AddTransient<BooksService>();
 
             services.AddSwaggerGen(c =>
             {
