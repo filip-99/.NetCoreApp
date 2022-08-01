@@ -69,6 +69,11 @@ namespace my_books
             {
                 endpoints.MapControllers();
             });
+
+            // Sada u Configure metodi inicializujemo naša bazu podataka tj.. ubacujemo u nju podatke iz klase "AppDbInitializer"
+            // Tačnije u toj klasi se nalazi metoda Seed() sa prosleđenom promenjivom tipa IApplicationBuilder
+            // Dakle kada startujemo program okinuće se ubacivanje u bazu podataka
+            AppDbInitializer.Seed(app);
         }
     }
 }
