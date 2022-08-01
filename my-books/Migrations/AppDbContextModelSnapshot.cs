@@ -9,6 +9,7 @@ using my_books.Data;
 namespace my_books.Migrations
 {
     [DbContext(typeof(AppDbContext))]
+    // Ova klasa pomaže EntityFramework-u da se migracija izvrši do kraja tj. da se izvrši kreiranje tabela u bazi na osnovu modela
     partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
