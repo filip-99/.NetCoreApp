@@ -52,5 +52,14 @@ namespace my_books.Controllers
             // Ok() - ovo je samo jedan od tipova koje metoda može da vrati
             return Ok();
         }
+
+        // API End-Point je HttpPut metod
+        [HttpPut("update-book-by-id/{id}")]
+        // Imaćemo metodu i 2 parametra, id koji se prosleđuje kroz url zahteva i podatke koje klijent šalje kao request tj. iz tela zahteva 
+        public IActionResult UpdateBookById(int id, [FromBody]BookVM book)
+        {
+            var updateBook = _booksService.UpdateBookById(id, book);
+            return Ok(updateBook);
+        }
     }
 }
