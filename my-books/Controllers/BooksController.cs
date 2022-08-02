@@ -21,6 +21,25 @@ namespace my_books.Controllers
             _booksService=booksService;
         }
 
+        // Kreiramo HTTP metodu za prikaz svih knjiga u bazi
+        // Nazvaćemo API krajnju tačku get-all-books
+        [HttpGet("get-all-books")]
+        public IActionResult GetAllBooks()
+        {
+            var allBooks = _booksService.GetAllBooks();
+            return Ok(allBooks);
+        }
+
+        // Kreiramo sada API End-Point tj. krajnju tačku za vraćanje samo jedne knjige iz baze
+        // Kroz HttpGet zahtev prosleđujemo id da bi dobili podatke o knjizi sa tim id-em
+        // Bitno je da bude tačan naziv jer će API End-Point morati da mapira parametar sa parametrom u metodi
+        [HttpGet("get-book-by-id/{id}")]
+        public IActionResult GetBookById(int id)
+        {
+            var book = _booksService.GetBookById(id);
+            return Ok(book);
+        }
+
         // Sada će mo implementirati EndPoint tj. krajnje tačke
         // Prva će biti HttpPost jer šaljemo podatke u bazu
         // Da bi osigurali da se radi baš o ovoj krajnjoj tački dodelićemo naziv
