@@ -58,5 +58,31 @@ namespace my_books.Data.Services
             var book = _context.Books.FirstOrDefault(n => n.Id == bookId);
             return book;
         }
+
+        // Sada kreiramo metodu za ažuriranje podataka u bazi
+        // Ovoj metodi će biti prosleđen Id i novi podaci, koji su ograničeni u vju modelu i koje unosi korisnik
+        public Book UpdateBookById(int bookId, BookVM book)
+        {
+            // Dakle proveravamo da li se ID prosleđen metodi nalazi u bazu podataka
+            // Ako se nalazi sada će promenjiva _book referencirati na taj red u tabeli sa prosleđenim ID-em, u suprotnom imaće vrednost null
+            var _book = _context.Books.FirstOrDefault(n => n.Id == bookId);
+            // Ako ID postoji i nije null izvršiće se ažuriranje za taj red u tabeli čiji id je prosleđen metodi
+            if(_book != null)
+            {
+                _book.Title = book.Title;
+                _book.Description = book.Description;
+                _book.IsRead = book.IsRead;
+                _book.DateRead = book.IsRead ? book.DateRead.Value : null;
+                _book.Genre = book.Genre;
+                _book.Author = book.Author;
+                _book.Rate = book.IsRead ? book.Rate.Value : null;
+                _book.Cover = book.Cover;
+
+                // Sačuvaćemo promene
+                _context.SaveChanges();
+            }
+            // Na kraju metoda vraća apdejtovan red u tabeli
+            return _book;
+        }
     }
 }
