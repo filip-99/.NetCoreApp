@@ -43,7 +43,7 @@ namespace my_books.Data.Services
 
         // Sada je potrebno da kreiramo metodu koja će prikazati sve podatke iz baze
         // Metoda je tipa List<> je vraća listu knjiga iz baze
-        public List<Book> GetAllBook()
+        public List<Book> GetAllBooks()
         {
             // Imamo promenjivu var koja je tipa list, jer smo stavili da je jednak našoj bazi sa knjigama(_context.Books) konvertovanu u listu .ToList()
             var allBooks = _context.Books.ToList();
