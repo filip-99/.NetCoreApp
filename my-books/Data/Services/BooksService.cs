@@ -1,6 +1,8 @@
 ﻿using my_books.Data.Models;
 using my_books.Data.ViewModels;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace my_books.Data.Services
 {
@@ -37,6 +39,24 @@ namespace my_books.Data.Services
             // Sada kada smo uzeli prosleđene podatke funkciji, dodelili im vrednosti, potrebno je da ih prosledimo kontekst klasi
             _context.Books.Add(_book);
             _context.SaveChanges();
+        }
+
+        // Sada je potrebno da kreiramo metodu koja će prikazati sve podatke iz baze
+        // Metoda je tipa List<> je vraća listu knjiga iz baze
+        public List<Book> GetAllBook()
+        {
+            // Imamo promenjivu var koja je tipa list, jer smo stavili da je jednak našoj bazi sa knjigama(_context.Books) konvertovanu u listu .ToList()
+            var allBooks = _context.Books.ToList();
+            return allBooks;
+        }
+
+        // Sada kreiramo metodu za odabir jedne knjige iz baze na osnovu prosleđenog ID-a
+        public Book GetBookById(int bookId)
+        {
+            // Proveravamo bazu da li postoji knjiga koja je jednaka id-u prosleđenom u metodi
+            // Funkcija FirstOrDefault ako ne uspe da nađe zadati ID vratiće kao razultat null vrednost (takođe je mogla da se koristi funkcija "First", ali ona će izbaciti grešku ako ne nađe ID)
+            var book = _context.Books.FirstOrDefault(n => n.Id == bookId);
+            return book;
         }
     }
 }
