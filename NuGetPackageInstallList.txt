@@ -8,3 +8,4 @@ KOMANDE U Package Manager Console:
 
 + Add-Migration InitialDatabaseMigration
 + Update-Database
++ Add-Migration PublisherAdded
