@@ -44,7 +44,7 @@ namespace my_books.Controllers
         // Prva će biti HttpPost jer šaljemo podatke u bazu
         // Da bi osigurali da se radi baš o ovoj krajnjoj tački dodelićemo naziv
         [HttpPost("add-book")]
-        // Tip metode IActionResult || AddBook - naziv metode || [FromBody] uzima se kontekst odnosno telo klase BookVM
+        // Tip metode IActionResult || AddBook - naziv metode || [FromBody] zahtev tj. request će dostaviti podatke koji se prosleđuju ovom parametru book tipa BookVP
         // Prosleđeni parametar [FromBody]BookVM book znači da se očekuje pri unosu da se popune sva polja u klasi BookVM
         public IActionResult AddBook([FromBody]BookVM book)
         {
@@ -61,5 +61,14 @@ namespace my_books.Controllers
             var updateBook = _booksService.UpdateBookById(id, book);
             return Ok(updateBook);
         }
+
+        // Kreiramo zahtev za brisanje podataka iz baze
+        [HttpDelete("delete-book-by-id/{id}")]
+        public IActionResult DeleteBookById(int id)
+        {
+            _booksService.DeleteBookById(id);
+            return Ok(_booksService);
+        }
+
     }
 }

@@ -11,6 +11,7 @@ namespace my_books.Data
     public class AppDbContext : DbContext
     {
         // Kreiramo konstruktor i da bi uključio potrebne elemente u njega, treba da izgleda ovako:
+        // Ova izvedena klasa imaće pristup osnovnoj klasi i svim njenim parametrima zato nam koristi base(options) uz konstruktor. Gde će mo pozivom ove klase imati pristup osnovnoj klasi, koja nam omogućava rad sa bazom
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
