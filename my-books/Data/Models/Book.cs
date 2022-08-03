@@ -29,5 +29,9 @@ namespace my_books.Data.Models
         public int PublisherId { get; set; }
         // Pošto možemo imati samo jednog Publishera tj. izdavača za knjigu, definisaćemo jedan parametar tipa Publisher, a ne listu, jer to bi značilo više Publishera
         public Publisher Publisher { get; set; }
+
+        // Sada navigiramo model klasu Book sa model kalsom Author.cs, pa pošto je odnos više prema više iskoristićemo zajedničku klasu Book_Author.cs
+        public List<Book_Author> Book_Authors { get; set; }
+
     }
 }
