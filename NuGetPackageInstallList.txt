@@ -10,3 +10,5 @@ KOMANDE U Package Manager Console:
 + Update-Database
 + Add-Migration PublisherAdded
 + Update-Database
++ Add-Migration ManyToManyAdded
++ Update-Database
