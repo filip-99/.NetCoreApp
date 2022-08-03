@@ -4,6 +4,7 @@
     public class Book_Author
     {
         // Pošto nisu dovoljni samo preneseni ključevi od model Author i Book, dodajemo ID za ovu model klasu
+        // Uzima se u obzir da 1 knjiga može da ima dakle više autora, tako da je potrebna ta srednja tabela da da jedinstveni ID za svaku knjigu
         public int Id { get; set; }
 
         // Dodajemo svojstva navigacije tj. referencu ka modelima u zavisnosti od odnosa za model klase Author i Book
