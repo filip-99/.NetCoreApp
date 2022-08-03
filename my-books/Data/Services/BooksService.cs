@@ -84,5 +84,18 @@ namespace my_books.Data.Services
             // Na kraju metoda vraća apdejtovan red u tabeli
             return _book;
         }
+
+        // Kreiramo metodu za brisanje podataka iz baze
+        // Metoda će biti void jer ne želimo da nam vraća izbrisanu knjigu
+        public void DeleteBookById(int bookId)
+        {
+            var _book = _context.Books.FirstOrDefault(n => n.Id == bookId);
+            if (_book != null)
+            {
+                // Sada kada promenjiva _book referencira na red u tabeli sa zadatim ID-em, obrisaćemo taj red iz baze
+                _context.Books.Remove(_book);
+                _context.SaveChanges();
+            }
+        }
     }
 }
