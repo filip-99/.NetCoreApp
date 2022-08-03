@@ -22,5 +22,12 @@ namespace my_books.Data.Models
         public string Cover { get; set; }
         // Zatim će mo imati datum i vreme, kada smo knjigu dodali u svojoj kolekciji
         public DateTime DateAdded { get; set; }
+
+
+        // Nakon toga definišemo svojstva tj. odnos sa model klasom Publisher
+        // Knjiga može imati samo jednog izdavača, pa će imati kao atribut njegov ID koje će predstavljati preneseni ključ (FOREIGN KEY)
+        public int PublisherId { get; set; }
+        // Pošto možemo imati samo jednog Publishera tj. izdavača za knjigu, definisaćemo jedan parametar tipa Publisher, a ne listu, jer to bi značilo više Publishera
+        public Publisher Publisher { get; set; }
     }
 }
