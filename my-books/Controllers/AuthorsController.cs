@@ -9,7 +9,7 @@ namespace my_books.Controllers
     [ApiController]
     public class AuthorsController : ControllerBase
     {
-        public AuthorsService _authorsService;
+        private AuthorsService _authorsService;
 
         public AuthorsController(AuthorsService authorsService)
         {
