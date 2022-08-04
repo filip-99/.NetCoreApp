@@ -14,7 +14,7 @@ namespace my_books.Controllers
     public class BooksController : ControllerBase
     {
         // Implementiraćemo servis koji smo kreirali, a potom konfigurisali za ubacivanje podataka u bazu
-        public BooksService _booksService;
+        private BooksService _booksService;
 
         public BooksController(BooksService booksService)
         {
