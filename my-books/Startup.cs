@@ -45,6 +45,10 @@ namespace my_books
             // Pa će mo koristiti servis, koji omogućava prelaz parametra u bazu
             services.AddTransient<BooksService>();
 
+            // Takođe konfigurisaćemo i za autora i izdavača
+            services.AddTransient<AuthorsService>();
+            services.AddTransient<PublishersService>();
+
             services.AddSwaggerGen(c =>
             {
                 // Promenićemo ovde naslov i radnu verziju iz v1 u v2
@@ -77,7 +81,7 @@ namespace my_books
             // Sada u Configure metodi inicializujemo naša bazu podataka tj.. ubacujemo u nju podatke iz klase "AppDbInitializer"
             // Tačnije u toj klasi se nalazi metoda Seed() sa prosleđenom promenjivom tipa IApplicationBuilder
             // Dakle kada startujemo program okinuće se ubacivanje u bazu podataka
-            AppDbInitializer.Seed(app);
+            //AppDbInitializer.Seed(app);
         }
     }
 }
