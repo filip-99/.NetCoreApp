@@ -30,13 +30,13 @@ namespace my_books.Controllers
             return Ok(allBooks);
         }
 
-        // Kreiramo sada API End-Point tj. krajnju tačku za vraćanje samo jedne knjige iz baze
         // Kroz HttpGet zahtev prosleđujemo id da bi dobili podatke o knjizi sa tim id-em
         // Bitno je da bude tačan naziv jer će API End-Point morati da mapira parametar sa parametrom u metodi
         [HttpGet("get-book-by-id/{id}")]
         public IActionResult GetBookById(int id)
         {
-            var book = _booksService.GetBookById(id);
+            // Pozivamo metodu za vraćanje određenog reda u bazi podataka na osnovu ID-a, ali sa imenima autora i 
+            var book = _booksService.BookWithAuthorsVM(id);
             return Ok(book);
         }
 
