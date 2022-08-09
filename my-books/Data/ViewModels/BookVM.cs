@@ -21,4 +21,18 @@ namespace my_books.Data.ViewModels
         // Ovo znači da i jedna knjiga može imati više autora, tako da dodajemo listu
         public List<int> AuthorId { get; set; }
     }
+
+    public class BookWithAuthorsVM
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public bool IsRead { get; set; }
+        public DateTime? DateRead { get; set; }
+        public string Genre { get; set; }
+        public int? Rate { get; set; }
+        public string Cover { get; set; }
+
+        public string PublisherName { get; set; }
+        public List<string> AuthorNames { get; set; }
+    }
 }
