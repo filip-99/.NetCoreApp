@@ -30,7 +30,6 @@ namespace my_books.Data.Services
                 // Ovde će mo prvo proveriti da li je knjiga uopšte pročitana. Ako jeste unesi datum, ako nije biće null
                 DateRead = book.IsRead ? book.DateRead.Value : null,
                 Genre = book.Genre,
-                Author = book.Author,
                 // Takođe i ovde je potrebno ispitati da li je knjiga najpre pročitana
                 Rate = book.IsRead ? book.Rate.Value : null,
                 Cover = book.Cover,

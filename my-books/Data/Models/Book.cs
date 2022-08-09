@@ -15,7 +15,6 @@ namespace my_books.Data.Models
         // Zatim ako je označena pročitanom potrebno je da navedemo datum, ali i ne moramo(zato nam služi znak ?)
         public DateTime? DateRead { get; set; }
         public string Genre { get; set; }
-        public string Author { get; set; }
         // Zatim imamo polje za ocenu pročitane knjige, koje je takođe opciono, jer možda je nismo pročitali
         public int? Rate { get; set; }
         // Zatim sve knjige će imati naslovnu sliku ili kover
