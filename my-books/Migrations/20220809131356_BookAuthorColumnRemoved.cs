@@ -6,6 +6,7 @@ namespace my_books.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            // U novoj migraciji vidimo da je kolona Author uklonjena iz tabele Books
             migrationBuilder.DropColumn(
                 name: "Author",
                 table: "Books");

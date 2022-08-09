@@ -13,3 +13,4 @@ KOMANDE U Package Manager Console:
 + Add-Migration ManyToManyAdded
 + Update-Database
 + Add-Migration BookAuthorColumnRemoved
++ Update-Database
