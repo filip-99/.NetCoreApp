@@ -33,7 +33,6 @@ namespace my_books.Data
                         // Za datum kada je knjiga pročitana stavićemo -> današnji datum (znači gleda se datum u trenutku kada se ova knjiga unosi u bazu oduzmi 10 dana)
                         DateRead = DateTime.Now.AddDays(-10),
                         Genre = "Biography",
-                        Author = "First Author",
                         Rate = 4,
                         Cover = "https...",
                         DateAdded = DateTime.Now
@@ -44,7 +43,6 @@ namespace my_books.Data
                         Description = "2nd Book Description",
                         IsRead = false,
                         Genre = "Biography",
-                        Author = "First Author",
                         Cover = "https...",
                         DateAdded = DateTime.Now
                     });

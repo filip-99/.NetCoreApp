@@ -91,7 +91,6 @@ namespace my_books.Data.Services
                 _book.IsRead = book.IsRead;
                 _book.DateRead = book.IsRead ? book.DateRead.Value : null;
                 _book.Genre = book.Genre;
-                _book.Author = book.Author;
                 _book.Rate = book.IsRead ? book.Rate.Value : null;
                 _book.Cover = book.Cover;
 
