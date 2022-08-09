@@ -67,13 +67,26 @@ namespace my_books.Data.Services
             return allBooks;
         }
 
-        // Sada kreiramo metodu za odabir jedne knjige iz baze na osnovu prosleđenog ID-a
-        public Book GetBookById(int bookId)
+        public BookWithAuthorsVM BookWithAuthorsVM(int bookId)
         {
-            // Proveravamo bazu da li postoji knjiga koja je jednaka id-u prosleđenom u metodi
-            // Funkcija FirstOrDefault ako ne uspe da nađe zadati ID vratiće kao razultat null vrednost (takođe je mogla da se koristi funkcija "First", ali ona će izbaciti grešku ako ne nađe ID)
-            var book = _context.Books.FirstOrDefault(n => n.Id == bookId);
-            return book;
+            // Metoda treba da prikaže knjigu i podatke iz drugih tabela za ime autora i ime izdavača
+            // promenjiva _bookWithAuthors će dobiti podatke iz tabele Books i iz druge 2 tabele
+            var _bookWithAuthors = _context.Books.Where(n => n.Id == bookId).Select(book => new BookWithAuthorsVM()
+            {
+                Title = book.Title,
+                Description = book.Description,
+                IsRead = book.IsRead,
+                DateRead = book.IsRead ? book.DateRead.Value : null,
+                Genre = book.Genre,
+                Rate = book.IsRead ? book.Rate.Value : null,
+                Cover = book.Cover,
+                // Pošto promenjiva Publisher u klasi Book.cs ima referencu na tabelu Publishers uzimamo iz nje ime izdavača na sledeći način
+                PublisherName = book.Publisher.Name,
+                // Pošto promenjiva Book_Authors referencira na tabelu Books_Authors
+                AuthorNames = book.Book_Authors.Select(n => n.Author.FullName).ToList()
+            }).FirstOrDefault();
+
+            return _bookWithAuthors;
         }
 
         // Sada kreiramo metodu za ažuriranje podataka u bazi
