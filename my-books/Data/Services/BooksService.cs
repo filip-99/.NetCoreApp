@@ -11,34 +11,52 @@ namespace my_books.Data.Services
     {
         // Prvo će mo imati metodu za ubacivanje knjiga u bazi
         // Ovo će mo uraditi znači preko kontekst klase, jer ona komunicira sa bazom. Pa kreiramo najpre objekat, pa konstruktor sa ovim poljem
-        private AppDbContext _context;  
+        private AppDbContext _context;
         public BooksService(AppDbContext context)
         {
             _context=context;
         }
 
         // Pošto želimo da ubacimo podatke u bazu kreiramo metodu:
-        public void AddBook(BookVM book)
+        public void AddBookWithAuthors(BookVM book)
         {
             // Kreiraćemo objekat modela knjige tj. Model Book
             // Možemo pisati Book ili var kao što je navedeno
             var _book = new Book()
             {
-                Title = book.Title, 
+                Title = book.Title,
                 Description = book.Description,
                 IsRead = book.IsRead,
                 // Ovde će mo prvo proveriti da li je knjiga uopšte pročitana. Ako jeste unesi datum, ako nije biće null
-                DateRead = book.IsRead ? book.DateRead.Value : null, 
+                DateRead = book.IsRead ? book.DateRead.Value : null,
                 Genre = book.Genre,
                 Author = book.Author,
                 // Takođe i ovde je potrebno ispitati da li je knjiga najpre pročitana
                 Rate = book.IsRead ? book.Rate.Value : null,
                 Cover = book.Cover,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.Now,
+                // Potrebn je ažurirati model klasu Book.cs, tako da pri unosu popunimo polje PublisherId, koji predstavlja preneseni ključ
+                PublisherId = book.PublisherId
             };
             // Sada kada smo uzeli prosleđene podatke funkciji, dodelili im vrednosti, potrebno je da ih prosledimo kontekst klasi
             _context.Books.Add(_book);
             _context.SaveChanges();
+
+            // Sada je potrebno da prilikom unosa nove knjige izvršimo referenciranje sa AuthorId u tabeli Books_Authors i da te podatke unesemo i u nju
+            // Pošto imamo listu autora, jer 1 knjiga može imati više autora imamo foreach
+            foreach (var id in book.AuthorId)
+            {
+                // Kreiramo inastancu klase Book_Author.cs
+                var _book_author = new Book_Author()
+                {
+                    // Uzimamo podatke koji se prethodno uneti u bazu za tabelu Books
+                    BookId = _book.Id,
+                    AuthorId = id
+                };
+                // Vršimo unos u bazu i čuvamo promene
+                _context.Books_Authors.Add(_book_author);
+                _context.SaveChanges();
+            }
         }
 
         // Sada je potrebno da kreiramo metodu koja će prikazati sve podatke iz baze
@@ -67,7 +85,7 @@ namespace my_books.Data.Services
             // Ako se nalazi sada će promenjiva _book referencirati na taj red u tabeli sa prosleđenim ID-em, u suprotnom imaće vrednost null
             var _book = _context.Books.FirstOrDefault(n => n.Id == bookId);
             // Ako ID postoji i nije null izvršiće se ažuriranje za taj red u tabeli čiji id je prosleđen metodi
-            if(_book != null)
+            if (_book != null)
             {
                 _book.Title = book.Title;
                 _book.Description = book.Description;
