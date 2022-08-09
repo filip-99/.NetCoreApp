@@ -43,12 +43,12 @@ namespace my_books.Controllers
         // Sada će mo implementirati EndPoint tj. krajnje tačke
         // Prva će biti HttpPost jer šaljemo podatke u bazu
         // Da bi osigurali da se radi baš o ovoj krajnjoj tački dodelićemo naziv
-        [HttpPost("add-book")]
+        [HttpPost("add-book-with-authors")]
         // Tip metode IActionResult || AddBook - naziv metode || [FromBody] zahtev tj. request će dostaviti podatke koji se prosleđuju ovom parametru book tipa BookVP
         // Prosleđeni parametar [FromBody]BookVM book znači da se očekuje pri unosu da se popune sva polja u klasi BookVM
         public IActionResult AddBook([FromBody]BookVM book)
         {
-            _booksService.AddBook(book);
+            _booksService.AddBookWithAuthors(book);
             // Ok() - ovo je samo jedan od tipova koje metoda može da vrati
             return Ok();
         }
